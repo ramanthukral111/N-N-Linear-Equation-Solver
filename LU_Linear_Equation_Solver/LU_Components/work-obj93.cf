@@ -1,0 +1,4 @@
+v 4
+file . "LU_Componants.vhd" "710f0579c0c855613d59609e4fe897c8938d46f9" "20190502144306.200":
+  entity lu_controller at 1( 0) + 0 on 119;
+  architecture simple of lu_controller at 17( 466) + 0 on 120;

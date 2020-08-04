@@ -1,0 +1,176 @@
+library ieee;
+use ieee.std_logic_1164.all;
+-- use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
+
+entity LU_Controller is
+   port (
+      clk, reset    : in  std_logic;
+      address       : in  std_logic_vector (1 downto 0);
+      read          : in  std_logic;
+      readdata      : out std_logic_vector (31 downto 0);
+      write         : in  std_logic;
+      writedata     : in  std_logic_vector (31 downto 0)
+   );
+end LU_Controller;
+
+architecture simple of LU_Controller is
+
+    constant MAX_WIDTH             : integer := 8;
+    type MatrixA is array ((MAX_WIDTH * MAX_WIDTH)-1 downto 0) of std_logic_vector(31 downto 0);
+    type MatrixB is array (MAX_WIDTH -1 downto 0) of std_logic_vector(31 downto 0);
+
+   signal control_and_status_reg  : std_logic_vector (31 downto 0);
+   signal Matrix_A                : MatrixA;
+   signal Matrix_B                : MatrixB;
+   signal result_value            : std_logic_vector (31 downto 0);
+   signal k                       : integer := MAX_WIDTH +1;
+   signal i                       : integer := MAX_WIDTH +1;
+   signal j                       : integer := MAX_WIDTH +1;
+   signal l                       : integer := MAX_WIDTH +1;
+   signal counter                 : integer := 0;
+   signal counter_En              : std_logic := 0;
+
+   type tState is (stIDLE, stSTART, stPROCESSING, stFINISH);
+   signal state : tState;
+   signal i_state : tState;
+   signal l_state : tState;
+
+begin
+
+    -- CPU is reading data at address.
+    process (clk)
+      variable out_data : std_logic_vector (31 downto 0);
+      variable counterA : integer := 0;
+      variable counterB : integer := 0;
+      variable Count_i : integer := 0;
+
+    begin
+      if (rising_edge (clk)) then
+        if (read = '1') then
+          case address is
+            when "00" => out_data := control_and_status_reg;
+            when "01" => out_data := operand_a;
+            when "10" => out_data := Matrix_B;
+            when "11" => out_data := result_value;
+            when others => null;
+          end case;
+          readdata <= out_data;
+          report "read : address [" & integer'image (to_integer (unsigned (address))) & "]";
+          report "read : data [" & integer'image (to_integer (unsigned (out_data))) & "]";
+        elsif (write = '1') then
+          case address is
+            when "00" => 
+              if (writedata = x"00000001") then
+                  state <= stSTART;
+                  k <= 0;
+              end if;
+              control_and_status_reg <= writedata;
+
+            when "01" => 
+                Matrix_A(counterA) <= writedata;
+                control_and_status_reg <= std_logic_vector(to_unsigned(counterA, control_and_status_reg'length));
+                counterA := counterA + 1;
+
+            when "10" => 
+                Matrix_B(counterB)<= writedata;
+                control_and_status_reg <= std_logic_vector(to_unsigned(counterB, control_and_status_reg'length));
+                counterB := counterB +1;
+
+            when others => null;
+
+          end case;
+          report "write : address [" & integer'image (to_integer (unsigned (address))) & "]";
+          report "write : data [" & integer'image (to_integer (unsigned (writedata))) & "]";
+        else
+          case state is
+            when stSTART =>
+              control_and_status_reg <= x"00000003";
+              state <= stPROCESSING;
+            when stPROCESSING =>
+              
+            when stFINISH =>
+              control_and_status_reg <= x"00000000";
+              state <= stIDLE;
+            when stIDLE =>
+              state <= stIDLE;
+          end case;
+        end if;
+
+        case i_state is
+        when stSTART =>
+          counter <= counter + 1;
+          if(i >= MAX_WIDTH - 1) then
+            i_state <= stPROCESSING;
+          else
+            i <= i + 1;
+          end if;
+        when stPROCESSING =>
+          counter <= counter + 1;
+          if(counter > 32) then
+
+          end if;
+          if((counter -32) >= MAX_WIDTH - (k + 1)) then
+            j <= k + 1;
+            i_state <= stFINISH;
+          end if;
+        when stFINISH =>
+          i_state <= stIDLE;
+        when stIDLE =>
+          i_state <= stIDLE;
+
+      end case;
+
+      case l_state is
+        when stSTART =>
+          counter <= counter + 1;
+          if(counter >= 25) then
+            l <= l + 1;
+            counter <= 0;
+          end if;
+          if(l >= MAX_WIDTH - 1) then
+            j <= j + 1;
+            l_state <= stPROCESSING;
+          end if;
+        when stPROCESSING =>
+            l_state <= stFINISH;
+        when stFINISH =>
+          i_state <= stIDLE;
+        when stIDLE =>
+          i_state <= stIDLE;
+
+      end case;
+      end if;
+
+    end process;
+
+    process(k)
+    begin
+              
+      if(k < MAX_WIDTH - 1) then
+        i <= k + 1;
+        counter <= 0;
+        i_state <= stSTART;
+      else
+        state <= stFINISH;            -- If Outer Loop completes
+      end if;
+
+    end process;
+
+    process(i)
+    begin
+      
+    end process;
+
+    process(j)
+    begin
+        if(j < MAX_WIDTH - 1) then
+        l <= k + 1;
+        counter <= 0;
+        l_state <= stSTART;
+      else
+        k <= k + 1;           -- If Outer Loop completes
+      end if;
+    end process;
+
+end simple;

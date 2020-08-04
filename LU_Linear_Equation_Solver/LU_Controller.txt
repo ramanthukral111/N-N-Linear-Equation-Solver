@@ -1,0 +1,112 @@
+vsim -i -l msim_transcript work.lu_controller
+add wave -position insertpoint  \
+sim:/lu_controller/clk \
+sim:/lu_controller/reset \
+sim:/lu_controller/address \
+sim:/lu_controller/read \
+sim:/lu_controller/readdata \
+sim:/lu_controller/write \
+sim:/lu_controller/writedata \
+sim:/lu_controller/control_and_status_reg \
+sim:/lu_controller/Matrix_A \
+sim:/lu_controller/Matrix_B \
+/lu_controller/line__96/Temp_Matrix \
+sim:/lu_controller/result_value \
+sim:/lu_controller/k \
+sim:/lu_controller/i \
+sim:/lu_controller/j \
+sim:/lu_controller/l \
+/lu_controller/line__96/counter \
+/lu_controller/line__96/counterA \
+/lu_controller/line__96/counterB \
+/lu_controller/line__96/count \
+sim:/lu_controller/Div_A \
+sim:/lu_controller/Div_B \
+sim:/lu_controller/Div_Result \
+sim:/lu_controller/Mult_A \
+sim:/lu_controller/Mult_B \
+sim:/lu_controller/Mult_Result \
+sim:/lu_controller/Add_A \
+sim:/lu_controller/Add_B \
+sim:/lu_controller/Add_Result \
+sim:/lu_controller/add_sub \
+sim:/lu_controller/k_increment \
+sim:/lu_controller/j_increment \
+sim:/lu_controller/LB_i_increment \
+sim:/lu_controller/state \
+sim:/lu_controller/i_state \
+sim:/lu_controller/l_state \
+sim:/lu_controller/LB_state \
+sim:/lu_controller/LB_jstate
+
+# Setting Radix
+radix signal Mult_A float32
+radix signal Mult_B float32
+radix signal Mult_Result float32
+radix signal Div_A float32
+radix signal Div_B float32
+radix signal Div_Result float32
+radix signal Add_A float32
+radix signal Add_B float32
+radix signal Add_Result float32
+radix signal lu_controller/Matrix_A(0)
+radix signal Matrix_A(1) float32
+radix signal Matrix_A(2) float32
+radix signal Matrix_A(3) float32
+radix signal Matrix_A(4) float32
+radix signal Matrix_A(5) float32
+radix signal Matrix_A(6) float32
+radix signal Matrix_A(7) float32
+radix signal Matrix_A(8) float32
+
+radix signal Matrix_B(0) float32
+radix signal Matrix_B(1) float32
+radix signal Matrix_B(2) float32
+
+/lu_controller/line__96/Temp_Matrix  
+force -freeze sim:/lu_controller/clk 0 0, 1 {50 ps} -r 100
+force -freeze sim:/lu_controller/write 1 0
+force -freeze sim:/lu_controller/write 1 0
+force -freeze sim:/lu_controller/address 01 0
+force -freeze sim:/lu_controller/writedata 00111111100000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 00000000000000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 00000000000000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 00111111000000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 00111111100000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 00000000000000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 00111111010000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 00111110100000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 00111111100000000000000000000000 0
+run 100ps
+
+# MatrixB
+
+force -freeze sim:/lu_controller/write 1 0
+force -freeze sim:/lu_controller/address 10 0
+force -freeze sim:/lu_controller/writedata 00111111100000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 01000000000000000000000000000000 0
+run 100ps
+force -freeze sim:/lu_controller/writedata 01000000010000000000000000000000 0
+run 100ps
+
+force -freeze sim:/lu_controller/address 11 0
+run 100ps
+force -freeze sim:/lu_controller/address 00 0
+force -freeze sim:/lu_controller/writedata 00000000000000000000000000000001 0
+run 100ps
+force -freeze sim:/lu_controller/write 0 0
+force -freeze sim:/lu_controller/writedata 00000000000000000000000000000000 0
+force -freeze sim:/lu_controller/writedata 00000000000000000000000000000000 0
+force -freeze sim:/lu_controller/address 00 0
+run 100ps
+run 30ns
+

@@ -1,0 +1,46 @@
+add wave -position insertpoint  \
+-label clk sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/clk \
+-label reset sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/reset \
+-label address sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/address \
+-label read sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/read \
+-label readdata sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/readdata \
+-label write sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/write \
+-label writedata sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/writedata \
+-label control_and_status_reg sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/control_and_status_reg \
+-label Matrix_A sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Matrix_A \
+-label Matrix_B sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Matrix_B \
+-label result_value sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/result_value \
+-label k sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/k \
+-label i sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/i \
+-label j sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/j \
+-label l sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/l \
+-label Div_A sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Div_A \
+-label Div_B sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Div_B \
+-label Div_Result sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Div_Result \
+-label Mult_A sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Mult_A \
+-label Mult_B sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Mult_B \
+-label Mult_Result sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Mult_Result \
+-label Add_A sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Add_A \
+-label Add_B sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Add_B \
+-label Add_Result sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/Add_Result \
+-label add_sub sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/add_sub \
+-label i_increment sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/k_increment \
+-label j_increment sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/j_increment \
+-label LB_i_increment sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/LB_i_increment \
+-label UY_i_increment sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/UY_i_increment \
+-label division_by_zero sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/division_by_zero \
+-label state sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/state \
+-label i_state sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/i_state \
+-label l_state sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/l_state \
+-label LB_state sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/LB_state \
+-label LB_jstate sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/LB_jstate \
+-label UY_state sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/UY_state \
+-label UY_jstate sim:/lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/UY_jstate \
+
+add wave -position insertpoint \
+-label counterA /lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/line__99/counterA \
+-label counterB /lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/line__99/counterB \
+-label counter /lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/line__99/counter \
+-label count /lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/line__99/count \
+-label Temp_Matrix /lu_linear_equation_solver_tb/lu_linear_equation_solver_inst/lu_matrix_equation_solver_0/line__99/Temp_Matrix
+run 1ms
