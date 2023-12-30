@@ -1,2 +1,2 @@
-# N-N-Linear-Equation-Solver
+# NXN-Linear-Equation-Solver
 Designed and implemented a Linear Equation Solver using Quartus lite 18.1 on Ubuntu.This algorithm used here is LU decomposition with no rotation. Kindly note that the Matrix input should consists of only integers while the output matrix can consist of floating point numbers. It uses two free IP componants ALTFP_MULT and ALTFP_ADD_SUB for floating point addition and multiplication. This project is tested for DEO nano Board Intel Cyclone IV E. You can find the detail description in project report. 
